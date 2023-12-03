@@ -10,6 +10,9 @@
     <p>Hello World</p>
     <script>
         const socket = io();
+        socket.on('myCustomEvent', (data)=>{
+            document.write(data.desc)
+        })
     </script>
 </body>
 </html>

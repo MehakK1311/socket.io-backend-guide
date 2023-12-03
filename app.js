@@ -14,6 +14,14 @@ app.get('/', (req,res)=>{
 io.on('connection', (socket)=>{
     console.log('user connected')
 
+    setTimeout(()=>{
+
+        socket.emit('myCustomEvent', {
+            desc: 'Custom message from server'
+        })
+
+    }, 3000)
+
     socket.on('disconnect', ()=>{
         console.log('user disconnected')
     })
