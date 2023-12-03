@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js"
+      integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <title>Hello World</title>
-</head>
-<body>
+  </head>
+  <body>
     <p>Hello World</p>
     <script>
         const socket = io();
-        socket.on('myCustomEventServer', (data)=>{
-            document.write(data.desc)
-        })
-
-        socket.emit('myCustomEventClient', {
-            desc: 'Custom message from client'
-        })
-
-    </script>
-</body>
+      
+        // Server Side Custom Event
+        socket.on("myCustomEventServer", (data) => {
+          document.write(data.msg + "<br>");
+        });
+      
+        // Client Side Custom Event
+        socket.emit("myCustomEventClient", {
+          desc: "Custom message from client",
+        });
+      
+        // Catch broadcast event
+        socket.on("broadcast", (data) => {
+          document.write(data.msg + "<br>");
+        });
+      </script>      
+  </body>
 </html>
