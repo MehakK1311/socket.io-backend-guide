@@ -10,9 +10,14 @@
     <p>Hello World</p>
     <script>
         const socket = io();
-        socket.on('myCustomEvent', (data)=>{
+        socket.on('myCustomEventServer', (data)=>{
             document.write(data.desc)
         })
+
+        socket.emit('myCustomEventClient', {
+            desc: 'Custom message from client'
+        })
+
     </script>
 </body>
 </html>

@@ -16,11 +16,15 @@ io.on('connection', (socket)=>{
 
     setTimeout(()=>{
 
-        socket.emit('myCustomEvent', {
+        socket.emit('myCustomEventServer', {
             desc: 'Custom message from server'
         })
 
     }, 3000)
+
+    socket.on('myCustomEventClient', (data)=>{
+        console.log(data.desc)
+    })
 
     socket.on('disconnect', ()=>{
         console.log('user disconnected')
