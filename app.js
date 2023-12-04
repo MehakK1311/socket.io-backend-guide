@@ -13,7 +13,10 @@ app.get("/", (req, res) => {
 
 let users = 0;
 
-const roomNum = 1;
+//rooms
+let roomNum = 1;
+//no. of users in room
+let full = 0;
 
 //using custom namespaces
 const customNamespace = io.of("/custom-namespace");
@@ -64,6 +67,14 @@ customNamespace.on("connection", (socket) => {
   customNamespace
     .in(`room-${roomNum}`)
     .emit("connectedRoom", `you are connected to room number ${roomNum}`);
+
+  //creating a limit for no. of users in a rooms
+  //and sending new user in next room
+  full++
+  if(full>=2){
+    full=0
+    roomNum++;
+  }
 
   socket.on("disconnect", () => {
     console.log("user disconnected");
