@@ -24,10 +24,15 @@
         socket.on("myCustomEventServer", (data) => {
           document.write(data.msg + "<br>");
         });
-      
+        
         // Client Side Custom Event
         socket.emit("myCustomEventClient", {
           desc: "Custom message from client",
+        });
+
+        //creating room
+        socket.on("connectedRoom", (data) => {
+          document.write(data + "<br>");
         });
       
         // Catch broadcast event

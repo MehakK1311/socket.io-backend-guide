@@ -13,6 +13,7 @@ app.get("/", (req, res) => {
 
 let users = 0;
 
+const roomNum = 1;
 
 //using custom namespaces
 const customNamespace = io.of("/custom-namespace");
@@ -52,6 +53,17 @@ customNamespace.on("connection", (socket) => {
   socket.broadcast.emit("myCustomEventServer", {
     msg: `${users} users connected!`,
   });
+
+  //join a room
+  socket.join(`room-${roomNum}`);
+
+  //for default namespace
+  // io.sockets.in("", {});
+
+  //for custom namespace
+  customNamespace
+    .in(`room-${roomNum}`)
+    .emit("connectedRoom", `you are connected to room number ${roomNum}`);
 
   socket.on("disconnect", () => {
     console.log("user disconnected");
