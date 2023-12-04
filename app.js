@@ -13,7 +13,16 @@ app.get("/", (req, res) => {
 
 let users = 0;
 
-io.on("connection", (socket) => {
+
+//using custom namespaces
+const customNamespace = io.of("/custom-namespace");
+// default namespace is '/'
+
+//for default namespace
+// io.on("connection", (socket) => {}
+
+//for custom namespace
+customNamespace.on("connection", (socket) => {
   console.log("user connected");
   users++;
 
@@ -28,7 +37,14 @@ io.on("connection", (socket) => {
   });
 
   //broadcasting a message
-  io.sockets.emit("broadcast", {
+
+  //for default namespace
+  // io.sockets.emit("broadcast", {
+  //   msg: `Broadcast Message`,
+  // });
+
+  //for custom namespace
+  customNamespace.emit("broadcast", {
     msg: `Broadcast Message`,
   });
 

@@ -14,8 +14,12 @@
   <body>
     <p>Hello World</p>
     <script>
-        const socket = io();
+
+      //for default namespace
+      // const socket = io();
       
+      //for custom namespace
+        const socket = io('/custom-namespace');
         // Server Side Custom Event
         socket.on("myCustomEventServer", (data) => {
           document.write(data.msg + "<br>");
