@@ -40,6 +40,28 @@
         socket.on("broadcast", (data) => {
           document.write(data.msg + "<br>");
         });
+
+        //ERROR HANDLING
+        //connection failed
+        socket.on("connect_failed", () => {
+          document.body.innerHTML = ''
+          alert("Connection failed")
+        });
+        //reconnect
+        socket.on("reconnecting", () => {
+          document.body.innerHTML = ''
+          alert("Reconnected")
+        });
+        //reconnect failed
+        socket.on("reconnect_failed", () => {
+          document.body.innerHTML = ''
+          alert("Reconnection failed")
+        });
+        //error
+        socket.on("reconnect_failed", () => {
+          document.body.innerHTML = ''
+          alert("Error occurred")
+        });
       </script>      
   </body>
 </html>
